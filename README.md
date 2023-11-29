@@ -9,7 +9,7 @@ SMS companies do not have a ground source of truth when it comes to updating are
 
 # The Solution 
 
-This open-source programmatic API can fetch real-time locale data. That will be automatically refreshed and updated as time goes on. For now, we are starting with area codes. The result of this is that  companies can spend less time worrying about whether their area code or timezone data is updated for messaging and more time shipping impactful features  for their customers. 
+This open-source programmatic API can fetch real-time locale data. That will be automatically refreshed and updated as time goes on. For now, we are starting with area codes. The result of this is that  companies can spend less time worrying about whether their locale data is updated for messaging and more time shipping impactful features for their customers. 
 
 # Roadmap/Asks (How you can help!)
 
