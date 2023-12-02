@@ -13,9 +13,9 @@ This open-source programmatic API can fetch real-time locale data. That will be 
 
 # Roadmap/Asks (How you can help!)
 
-- Scraping area code data using beautifulsoup off of Allareacodes and/or Wikipedia's NANP page (In progress)
+- Scraping area code data using beautifulsoup off of Allareacodes and/or Wikipedia's NANP page (In progress, could use some help!)
 - A fast DB store to read and write new data (In progress)
-- Security (rate limiting, validation, etc) 
+- Security (rate limiting, validation, etc) (In Progress, could use some help!
 
 
  
