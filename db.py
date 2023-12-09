@@ -19,3 +19,33 @@ def create_database():
 
 if __name__ == '__main__':
     create_database()
+
+
+def insert_area_code(csv_file_path):
+    conn = sqlite3.connect(DATABASE_NAME)
+    cursor = conn.cursor()
+
+    with open(csv_file_path, mode='r') as csv_file:
+        csv_reader = csv.DictReader(csv_file)
+        for row in csv_reader:
+            state = row['state']
+            area_code = row['area_code']
+            cursor.execute('''
+                INSERT INTO area_codes (state, area_code)
+                VALUES (?, ?)
+            ''', (state, area_code))
+
+    conn.commit()
+    conn.close()
+
+
+
+def get_all_area_codes_from_db():
+    conn = sqlite3.connect(DATABASE_NAME)
+    cursor = conn.cursor()
+
+    cursor.execute('SELECT * FROM area_codes')
+    area_codes = cursor.fetchall()
+
+    conn.close()
+    return area_codes

@@ -1,14 +1,6 @@
-from flask import Flask, jsonify, abort
-from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
-app = Flask(__name__)
-limiter = Limiter(
-    app,
-    key_func=get_remote_address,
-    default_limits=["200 per day", "50 per hour"]
-)
+import csv
 
-#  area codes data
+# Assuming area_codes_data is a dictionary where the keys are states and the values are lists of area codes
 
 area_codes_data = {
     "Alabama": [205, 251, 256, 334, 659, 938],
@@ -64,37 +56,20 @@ area_codes_data = {
     "Wyoming": [307]
   }
 
-@app.route('/areacodes', methods=['GET'])
-def get_all_area_codes():
-    
-      clean_data = {state: codes for state, codes in area_codes_data.items()}
-      return jsonify(clean_data)
+# The name of the CSV output file
+output_csv_file = 'area_codes.csv'
 
-@app.route('/areacodes/<string:state>', methods=['GET'])
-def get_area_codes_by_state(state):
-    state_lower = state.lower()
+# Open the file in write mode
+with open(output_csv_file, 'w', newline='') as csvfile:
+    # Create a CSV writer object
+    csvwriter = csv.writer(csvfile)
 
+    # Write the header
+    csvwriter.writerow(['state', 'area_code'])
 
-    for key in area_codes_data:
-        if key.lower() == state_lower:
-            return jsonify(area_codes_data[key])
-
-    abort(404, description="State not found")
-    
-@app.route('/states', methods=['GET'])
-def get_all_states():
-    return jsonify(list(area_codes_data.keys()))
-
-@app.route('/states/<int:area_code>', methods=['GET'])
-def get_state_by_area_code(area_code):
-    
-    if not area_code.isdigit() or len(area_code) != 3:
-        abort(400, description="An area code must be exactly three digits long and contain only numbers.")
+    # Write the data
     for state, codes in area_codes_data.items():
-        if area_code in codes:
-            return jsonify(state)
-    abort(404, description="Area code not found")
+        for code in codes:
+            csvwriter.writerow([state, code])
 
-
-if __name__ == '__main__':
-    app.run(debug=True)
+print(f"CSV file '{output_csv_file}' created successfully.")
