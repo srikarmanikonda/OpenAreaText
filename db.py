@@ -1,6 +1,6 @@
 import sqlite3
+from enums import DATABASE_NAME
 
-DATABASE_NAME = "area_codes.db"
 
 def create_database():
     conn = sqlite3.connect(DATABASE_NAME)
@@ -45,6 +45,27 @@ def get_all_area_codes_from_db():
     cursor = conn.cursor()
 
     cursor.execute('SELECT * FROM area_codes')
+    area_codes = cursor.fetchall()
+
+    conn.close()
+    return area_codes
+
+def get_area_codes_by_state_from_db(state):
+    conn = sqlite3.connect(DATABASE_NAME)
+    cursor = conn.cursor()
+
+    cursor.execute('SELECT * FROM area_codes WHERE state = ?', (state,))
+    area_codes = cursor.fetchall()
+
+    conn.close()
+
+    return area_codes
+
+def get_states():
+    conn = sqlite3.connect(DATABASE_NAME)
+    cursor = conn.cursor()
+
+    cursor.execute('SELECT DISTINCT state FROM area_codes')
     area_codes = cursor.fetchall()
 
     conn.close()

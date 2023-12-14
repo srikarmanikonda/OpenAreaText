@@ -1,6 +1,5 @@
 import csv
 
-# Assuming area_codes_data is a dictionary where the keys are states and the values are lists of area codes
 
 area_codes_data = {
     "Alabama": [205, 251, 256, 334, 659, 938],
@@ -56,18 +55,13 @@ area_codes_data = {
     "Wyoming": [307]
   }
 
-# The name of the CSV output file
 output_csv_file = 'area_codes.csv'
 
-# Open the file in write mode
 with open(output_csv_file, 'w', newline='') as csvfile:
-    # Create a CSV writer object
     csvwriter = csv.writer(csvfile)
 
-    # Write the header
     csvwriter.writerow(['state', 'area_code'])
 
-    # Write the data
     for state, codes in area_codes_data.items():
         for code in codes:
             csvwriter.writerow([state, code])
