@@ -1,6 +1,6 @@
 import sqlite3
 from enums import DATABASE_NAME
-
+import csv
 
 def create_database():
     conn = sqlite3.connect(DATABASE_NAME)
@@ -19,7 +19,6 @@ def create_database():
 
 if __name__ == '__main__':
     create_database()
-
 
 def insert_area_code(csv_file_path):
     conn = sqlite3.connect(DATABASE_NAME)

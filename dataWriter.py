@@ -1,6 +1,5 @@
 import csv
 
-
 area_codes_data = {
     "Alabama": [205, 251, 256, 334, 659, 938],
     "Alaska": [907],
@@ -54,6 +53,7 @@ area_codes_data = {
     "Wisconsin": [262, 414, 534, 608, 715, 920],
     "Wyoming": [307]
   }
+
 
 output_csv_file = 'area_codes.csv'
 
