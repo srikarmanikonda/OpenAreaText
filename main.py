@@ -1,7 +1,6 @@
-from flask import Flask, jsonify, abort, request
+from flask import Flask, jsonify, abort
 from db import get_all_area_codes_from_db, get_area_codes_by_state_from_db, get_states, get_states, insert_area_code,create_database
 from flasgger import Swagger
-import csv
 from exceptions import StateNotFoundError
 app = Flask(__name__)
 Swagger(app)
@@ -69,21 +68,15 @@ area_codes_data = {
 @app.route('/areacodes', methods=['GET'])
 def get_all_area_codes():
     
-    """  Get area codes for a specific state.
+    """  Get all area codes in a list.
     ---
     tags:
         - Area Codes
-    parameters:
-      - name: state
-        in: path
-        type: string
-        required: true
-        description: The name of the state
+
     responses:
         200:
             description: Returns a list of area codes for the specified state.
-        404:
-            description: State not found.
+   
     """
     area_codes = get_all_area_codes_from_db()
     clean_data = {state: codes for state, codes in area_codes}
@@ -93,7 +86,7 @@ def get_all_area_codes():
 def get_area_codes_by_state(state):
     
     """
-    Get a list of all states.
+    Get area codes for a specific state
     ---
     tags:
         - States

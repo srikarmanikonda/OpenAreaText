@@ -1,8 +1,10 @@
 import sqlite3
-from enums import DATABASE_NAME
 import csv
+from enums import DATABASE_NAME
+
 
 def create_database():
+    
     conn = sqlite3.connect(DATABASE_NAME)
     cursor = conn.cursor()
 
@@ -10,15 +12,14 @@ def create_database():
         CREATE TABLE IF NOT EXISTS area_codes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             state TEXT NOT NULL,
-            area_code INTEGER NOT NULL
+            area_code INTEGER NOT NULL,
+            UNIQUE(state, area_code)
         )
     ''')
-
     conn.commit()
     conn.close()
 
-if __name__ == '__main__':
-    create_database()
+
 
 def insert_area_code(csv_file_path):
     conn = sqlite3.connect(DATABASE_NAME)
@@ -29,10 +30,14 @@ def insert_area_code(csv_file_path):
         for row in csv_reader:
             state = row['state']
             area_code = row['area_code']
-            cursor.execute('''
-                INSERT INTO area_codes (state, area_code)
-                VALUES (?, ?)
-            ''', (state, area_code))
+            try:
+                cursor.execute('''
+                    INSERT INTO area_codes (state, area_code)
+                    VALUES (?, ?)
+                ''', (state, area_code))
+            except sqlite3.IntegrityError:
+                print(f"Duplicate entry for state: {state}, area_code: {area_code} not added.")
+                continue
 
     conn.commit()
     conn.close()
@@ -43,7 +48,7 @@ def get_all_area_codes_from_db():
     conn = sqlite3.connect(DATABASE_NAME)
     cursor = conn.cursor()
 
-    cursor.execute('SELECT * FROM area_codes')
+    cursor.execute('SELECT state, area_code FROM area_codes')
     area_codes = cursor.fetchall()
 
     conn.close()
