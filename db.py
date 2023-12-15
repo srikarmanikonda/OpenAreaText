@@ -48,22 +48,31 @@ def get_all_area_codes_from_db():
     conn = sqlite3.connect(DATABASE_NAME)
     cursor = conn.cursor()
 
-    cursor.execute('SELECT state, area_code FROM area_codes')
+    cursor.execute('SELECT state, area_code FROM area_codes ORDER BY state')
     area_codes = cursor.fetchall()
 
     conn.close()
-    return area_codes
+    area_codes_dict = {}
+    for state, area_code in area_codes:
+        if state in area_codes_dict:
+            area_codes_dict[state].append(area_code)
+        else:
+            area_codes_dict[state] = [area_code]
+
+    return area_codes_dict
 
 def get_area_codes_by_state_from_db(state):
     conn = sqlite3.connect(DATABASE_NAME)
     cursor = conn.cursor()
 
-    cursor.execute('SELECT * FROM area_codes WHERE state = ?', (state,))
+    cursor.execute('SELECT * FROM area_codes WHERE LOWER(state) = ?', (state,))
     area_codes = cursor.fetchall()
 
     conn.close()
 
-    return area_codes
+    return [area_code[0] for area_code in area_codes]
+
+
 
 def get_states():
     conn = sqlite3.connect(DATABASE_NAME)

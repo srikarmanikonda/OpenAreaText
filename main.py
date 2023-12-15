@@ -79,23 +79,32 @@ def get_all_area_codes():
    
     """
     area_codes = get_all_area_codes_from_db()
-    clean_data = {state: codes for state, codes in area_codes}
-    return jsonify(clean_data)
+    return jsonify(area_codes)
 
 @app.route('/areacodes/<string:state>', methods=['GET'])
 def get_area_codes_by_state(state):
-    
     """
-    Get area codes for a specific state
-    ---
-    tags:
-        - States
-    responses:
-        200:
-            description: Returns a list of all states.
-    """
+Get area codes for a specific state.
+---
+tags:
+  - Area Codes
+parameters:
+  - name: state
+    in: path
+    type: string
+    required: true
+    description: The state for which to look up area codes
+responses:
+  200:
+    description: Returns a list of area codes for the specified state.
+    examples:
+      application/json: [205, 251, 256, 334, 659, 938]
+  404:
+    description: State not found.
+"""
+
     try:
-        area_codes = get_area_codes_by_state_from_db(state)
+        area_codes = get_area_codes_by_state_from_db(state.lower())
         return jsonify(area_codes)
     except StateNotFoundError: 
         abort(404, description="State not found")
@@ -138,8 +147,8 @@ def get_state_by_area_code(area_code):
             description: Area code not found.
     """
     
-    if not area_code.isdigit() or len(area_code) != 3:
-        abort(400, description="An area code must be exactly three digits long and contain only numbers.")
+    if not isinstance(area_code, int):
+        abort(400, description="Invalid area code format")
     for state, codes in area_codes_data.items():
         if area_code in codes:
             return jsonify(state)
