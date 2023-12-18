@@ -11,6 +11,20 @@ create_database()
 
 insert_area_code(CSV_FILE_PATH)
 
+@app.route('/', methods=['GET'])
+def index():
+    """
+    Default API route.
+    ---
+    tags:
+      - Default
+    responses:
+      200:
+        description: Welcome message of the API.
+    """
+    return jsonify({"message": "Welcome to the OpenAreaText API!"})
+
+
 
 @app.route('/areacodes', methods=['GET'])
 def get_all_area_codes():
