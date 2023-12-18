@@ -4,9 +4,36 @@ from flask_limiter.util import get_remote_address
 from scraper import scrape_area_codes
 from flasgger import Swagger
 from exceptions import StateNotFoundError
+
+swagger_config = {
+    "headers": [],
+    "specs": [
+        {
+            "endpoint": 'apispec_1',
+            "route": '/apispec_1.json',
+            "rule_filter": lambda rule: True,  # all in
+            "model_filter": lambda tag: True,  # all in
+        }
+    ],
+    "static_url_path": "/flasgger_static",
+    "swagger_ui": True,
+    "specs_route": "/apidocs/"
+}
+
+template = {
+    "swagger": "2.0",
+    "info": {
+        "title": "OpenAreaText",
+        "description": "Open Source area codes and locale API for SMS messaging and marketing companies.",
+        "version": "1.0.0"
+    }
+}
+
 app = Flask(__name__)
-Swagger(app)
+Swagger(app, config=swagger_config, template=template)
+
 limiter = Limiter(get_remote_address, app=app, default_limits=["200 per day", "50 per hour"])
+
 
 
 # CSV_FILE_PATH = 'area_codes.csv'
