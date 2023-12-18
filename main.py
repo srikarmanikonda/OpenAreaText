@@ -1,11 +1,15 @@
 from flask import Flask, jsonify, abort
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 from scraper import scrape_area_codes
 from flasgger import Swagger
 from exceptions import StateNotFoundError
 app = Flask(__name__)
 Swagger(app)
+limiter = Limiter(get_remote_address, app=app, default_limits=["200 per day", "50 per hour"])
 
-CSV_FILE_PATH = 'area_codes.csv'
+
+# CSV_FILE_PATH = 'area_codes.csv'
 
 area_codes_data = scrape_area_codes()
 

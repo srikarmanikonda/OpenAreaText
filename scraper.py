@@ -16,7 +16,7 @@ def scrape_area_codes():
   for row in table.find_all('tr')[1:]:
     cells = row.find_all('td')
     if len(cells) > 1:
-      state_or_province = cells[0].text.strip().replace(' (list)', '')
+      state_or_province = cells[0].text.strip().replace(' (list)', '').lower()
       area_codes = cells[1].text.strip().split(', ')
       area_codes = [int(code) for code in area_codes]
 
