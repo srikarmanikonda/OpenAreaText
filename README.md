@@ -3,7 +3,7 @@ Open Source area codes and locale API for SMS messaging and marketing companies.
 
 Why I am working on this: 
 
-API docs: 
+API docs:  http://www.openareatext.com/apidocs/
 
 API architecture/overview: 
 
