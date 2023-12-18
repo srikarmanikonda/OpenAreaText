@@ -3,6 +3,12 @@ entrypoint: gunicorn -b :$PORT main:app
 
 env_variables:
   FLASK_ENV: "production"
+  CLOUD_SQL_USERNAME: "postgres"
+  CLOUD_SQL_PASSWORD: "srikar"
+  CLOUD_SQL_DATABASE_NAME: "testdb"
+  CLOUD_SQL_CONNECTION_NAME: "scenic-vim-406904:us-east1:testdb"
+  # Optional: Only if you need to override the default '/cloudsql' directory
+  # DB_SOCKET_DIR: "/cloudsql"
 
 handlers:
   - url: /.*

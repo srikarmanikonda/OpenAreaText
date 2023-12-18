@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, abort
-from db import get_all_area_codes_from_db, get_area_codes_by_state_from_db, get_states, get_states, insert_area_code,create_database,get_state_by_area_code_from_db
+from scraper import scrape_area_codes
 from flasgger import Swagger
 from exceptions import StateNotFoundError
 app = Flask(__name__)
@@ -7,9 +7,7 @@ Swagger(app)
 
 CSV_FILE_PATH = 'area_codes.csv'
 
-create_database()
-
-insert_area_code(CSV_FILE_PATH)
+area_codes_data = scrape_area_codes()
 
 @app.route('/', methods=['GET'])
 def index():
@@ -39,8 +37,8 @@ def get_all_area_codes():
             description: Returns a list of area codes for the specified state.
    
     """
-    area_codes = get_all_area_codes_from_db()
-    return jsonify(area_codes)
+
+    return jsonify(area_codes_data)
 
 @app.route('/areacodes/<string:state>', methods=['GET'])
 def get_area_codes_by_state(state):
@@ -65,8 +63,12 @@ responses:
 """
 
     try:
-        area_codes = get_area_codes_by_state_from_db(state.lower())
-        return jsonify(area_codes)
+        state = state.lower()
+        if state in area_codes_data:
+            
+            return jsonify(area_codes_data[state])
+        # area_codes = get_area_codes_by_state_from_db(state.lower())
+        # return jsonify(area_codes)
     except StateNotFoundError: 
         abort(404, description="State not found")
     
@@ -81,8 +83,10 @@ def get_all_states():
         200:
             description: Returns a list of all states.
     """
-    states = get_states()  
-    return jsonify(states)  
+    states = list(area_codes_data.keys())
+    return jsonify(states)
+    # states = get_states()  
+    # return jsonify(states)  
 
 
 
@@ -110,10 +114,13 @@ def get_state_by_area_code(area_code):
     
     if not isinstance(area_code, int):
         abort(400, description="Invalid area code format")
+    for state, codes in area_codes_data.items():
+        if area_code in codes:
+            return jsonify(state)
 
-    state = get_state_by_area_code_from_db(area_code)  
-    if state:
-        return jsonify(state)
+    # state = get_state_by_area_code_from_db(area_code)  
+    # if state:
+    #     return jsonify(state)
     else:
         abort(404, description="Area code not found")
 
