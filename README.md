@@ -1,8 +1,6 @@
 # OpenAreaText
 Open Source area codes and locale API for SMS messaging and marketing companies. 
 
-Why I am working on this: 
-
 API docs:  http://www.openareatext.com/apidocs/
 
 API architecture/overview: 
@@ -22,6 +20,7 @@ This open-source programmatic API can fetch real-time locale data that will be a
 # Roadmap/Asks (How you can help!)
 
 - Scraping area code data using beautifulsoup off of Allareacodes and/or Wikipedia's NANP page ✅
+- Working endpoints for neccesary area codes use cases ✅
 - A fast DB store to read and write new data (Suspended, due to high compute costs. For now I am passing in the scraped dictionary manually)
 - Basic Security (rate limiting, validation, etc)✅
 - Contacts to engineers and engineering teams at the following companies: Attentive, PostScript, Telnyx, Twilio, Wizard SMS
