@@ -83,3 +83,16 @@ def get_states():
 
     conn.close()
     return area_codes
+def get_state_by_area_code_from_db(area_code):
+    conn = sqlite3.connect(DATABASE_NAME)
+    cursor = conn.cursor()
+
+    cursor.execute('SELECT state FROM area_codes WHERE area_code = ?', (area_code,))
+    result = cursor.fetchone()
+
+    conn.close()
+
+    if result:
+        return result[0]
+    else:
+        return None
