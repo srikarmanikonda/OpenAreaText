@@ -22,6 +22,7 @@ California,310
 California,323
 California,341
 California,350
+California,369
 California,408
 California,415
 California,424
@@ -39,14 +40,12 @@ California,661
 California,669
 California,707
 California,714
-California,738
 California,747
 California,760
 California,805
 California,818
 California,820
 California,831
-California,837
 California,840
 California,858
 California,909
@@ -64,6 +63,8 @@ Connecticut,475
 Connecticut,860
 Connecticut,959
 Delaware,302
+District of Columbia,202
+District of Columbia,771
 Florida,239
 Florida,305
 Florida,321
@@ -73,9 +74,11 @@ Florida,386
 Florida,407
 Florida,448
 Florida,561
+Florida,645
 Florida,656
 Florida,689
 Florida,727
+Florida,728
 Florida,754
 Florida,772
 Florida,786
@@ -108,10 +111,12 @@ Illinois,464
 Illinois,618
 Illinois,630
 Illinois,708
+Illinois,730
 Illinois,773
 Illinois,779
 Illinois,815
 Illinois,847
+Illinois,861
 Illinois,872
 Indiana,219
 Indiana,260
@@ -142,6 +147,7 @@ Louisiana,457
 Louisiana,504
 Louisiana,985
 Maine,207
+Maryland,227
 Maryland,240
 Maryland,301
 Maryland,410
@@ -189,6 +195,7 @@ Missouri,573
 Missouri,636
 Missouri,660
 Missouri,816
+Missouri,975
 Montana,406
 Nebraska,308
 Nebraska,402
@@ -211,6 +218,7 @@ New Mexico,505
 New Mexico,575
 New York,212
 New York,315
+New York,329
 New York,332
 New York,347
 New York,363
@@ -244,6 +252,7 @@ North Dakota,701
 Ohio,216
 Ohio,220
 Ohio,234
+Ohio,283
 Ohio,326
 Ohio,330
 Ohio,380
@@ -290,7 +299,6 @@ South Dakota,605
 Tennessee,423
 Tennessee,615
 Tennessee,629
-Tennessee,729
 Tennessee,731
 Tennessee,865
 Tennessee,901
@@ -307,7 +315,6 @@ Texas,430
 Texas,432
 Texas,469
 Texas,512
-Texas,621
 Texas,682
 Texas,713
 Texas,726
@@ -344,11 +351,11 @@ Washington,360
 Washington,425
 Washington,509
 Washington,564
-"Washington, DC",202
-"Washington, DC",771
 West Virginia,304
 West Virginia,681
 Wisconsin,262
+Wisconsin,274
+Wisconsin,353
 Wisconsin,414
 Wisconsin,534
 Wisconsin,608
