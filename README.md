@@ -16,6 +16,9 @@ SMS companies do not have a ground source of truth when it comes to updating are
 This open-source programmatic API can fetch real-time locale data that will be automatically refreshed and updated as time goes on. For now, I am starting with area codes. The result of this is that  companies can spend less time worrying about whether their locale data is updated for messaging and more time shipping impactful features for their customers. The flexibility of this API can allow companies to use this as a ground source of truth for locale data or plug this api into your unit or integration tests so that engineers are aware of potential changes upcoming for locale data. 
 
 # Current Notable Users (please see below for who we'd love to bring onto this project!)
+- OneText
+- Recharge SMS
+- Wizard SMS
 
 # Roadmap/Asks (How you can help!)
 
